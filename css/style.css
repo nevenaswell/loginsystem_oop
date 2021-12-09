@@ -1,0 +1,17 @@
+.bg-home {
+    background-color: white;
+    background-image: url('../assets/bg_home.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+   }
+
+   .bg-profile {
+    background-image: url('../assets/bg_profile.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+   }
+
