@@ -53,7 +53,7 @@
                         elseif ($_GET["error"] == "stmtfailed") {
                             echo "<p class='text-center'>Something went wrong, try again!</p>";
                         }
-                        elseif ($_GET["error"] == "usernametaken") {
+                        elseif ($_GET["error"] == "uidtaken") {
                             echo "<p class='text-center'>Usermane already taken!</p>";
                         }
                         elseif ($_GET["error"] == "none") {

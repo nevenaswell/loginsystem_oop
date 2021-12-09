@@ -35,7 +35,10 @@
                         }
                         elseif ($_GET["error"] == "wrongpassword") {
                             echo "<p class='text-center'>Incorrect password!</p>";
-                        }                        
+                        }
+                        elseif ($_GET["error"] == "usernotfound") {
+                            echo "<p class='text-center'>User not found!</p>";
+                        }                         
                     }
                 ?>
 

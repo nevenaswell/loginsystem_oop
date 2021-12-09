@@ -21,11 +21,11 @@ class Signup extends Dbh {
     
     //check if user exists in DB
     protected function checkUser($uid, $email) {
-        $stmt = $this->connect()->prepare('SELECT * FROM users2 WHERE usersUid = ? OR usersEmail = ?;');        
+        $stmt = $this->connect()->prepare('SELECT usersUid FROM users2 WHERE usersUid = ? OR usersEmail = ?;');        
 
         if (!$stmt->execute(array($uid, $email))) {
             $stmt = null;
-            header("location: ../signup.php?error=stmtfailed");
+            header("location: ../signup.php?error=uidtaken");
             exit();
         }
         

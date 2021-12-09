@@ -14,26 +14,28 @@ class Login extends Dbh {
             exit();
         }
 
-        //check username
+        //check username with db
         if ($stmt->rowCount() == 0) {
             $stmt = null;
-            header("location: ../login.php?error=wronglogin");
+            header("location: ../login.php?error=usernotfound");
             exit();
         }
 
-         //check password
+         //check password with db
         $pwdHashed = $stmt->fetchAll(PDO::FETCH_ASSOC);        
         $checkPwd = password_verify($pwd, $pwdHashed[0]["usersPwd"]);
 
-        if ( $checkPwd == false) {
+
+        //logging in the user
+        if ($checkPwd == false) {
             $stmt = null;
             header("location: ../login.php?error=wrongpassword");
             exit();
 
         } elseif ($checkPwd == true) {
-            $stmt = $this->connect()->prepare('SELECT * FROM users2 WHERE usersUid = ? OR usersEmail = ?;');
+            $stmt = $this->connect()->prepare('SELECT * FROM users2 WHERE usersUid = ? OR usersEmail = ? AND usersPwd = ?;');
 
-            if (!$stmt->execute(array($uid, $pwd))) {
+            if (!$stmt->execute(array($uid, $uid, $pwd))) {
                 $stmt = null;
                 header("location: ../login.php?error=stmtfailed");
                 exit();
@@ -50,11 +52,14 @@ class Login extends Dbh {
             //login the user
             session_start();
             $_SESSION["userid"] = $user[0]["usersId"];
-            $_SESSION["useruid"] = $user[0]["usersUid"];
-
+            $_SESSION["useruid"] = $user[0]["usersUid"];  
+            
             //close statement
-            $stmt = null;    
+            $stmt = null; 
         }
+        
+        //close statement
+        $stmt = null;  
         
     }
      
